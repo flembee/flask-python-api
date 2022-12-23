@@ -1,6 +1,8 @@
-from models.user import User
-from config import db
+from datetime import datetime
 from werkzeug.exceptions import NotFound
+
+from src.app.models.users_model import User
+from src.plugins.Database.database import db
 
 def get():
     '''
@@ -15,6 +17,7 @@ def post(body):
     :param body: request body
     :returns: the created entity
     '''
+
     user = User(**body)
     db.session.add(user)
     db.session.commit()
@@ -32,7 +35,7 @@ def put(body):
         db.session.merge(user)
         db.session.flush()
         db.session.commit()
-        return user
+        return User.query.get(body['id'])
     raise NotFound('no such entity found with id=' + str(body['id']))
 
 def delete(id):
