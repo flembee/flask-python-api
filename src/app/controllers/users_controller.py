@@ -1,7 +1,6 @@
 from flask import jsonify
 import bcrypt
 import src.app.services.users_service as user_service
-from src.app.models.users_model import User
 
 def get_users():
     ''' Get all entities'''

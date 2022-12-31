@@ -1,4 +1,3 @@
-from datetime import datetime
 from werkzeug.exceptions import NotFound
 
 from src.app.models.users_model import User
@@ -10,6 +9,14 @@ def get():
     :returns: all entity
     '''
     return User.query.all()
+
+def get_by_email(email):
+    '''
+    Get user by email
+    :returns: user
+    '''
+    
+    return User.query.filter_by(email=email).first()
 
 def post(body):
     '''

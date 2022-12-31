@@ -2,15 +2,16 @@ from flask import Blueprint, request
 from http import HTTPStatus
 from flasgger import swag_from
 from werkzeug.exceptions import HTTPException
+from flask_jwt_extended import jwt_required
 
 from src.app.schemas.users_schema import UsersSchema
 import src.app.controllers.users_controller as user_controller
-from src.app.models.users_model import User
 import json
 
 user_api = Blueprint('users', 'users')
 
 @user_api.route('/users', methods=['GET'])
+@jwt_required()
 @swag_from({
     'responses': {
         HTTPStatus.OK.value: {
@@ -37,6 +38,7 @@ def user_post():
     return user
 
 @user_api.route('/users/<string:id>', methods=['PUT'])
+@jwt_required()
 @swag_from({
     'responses': {
         HTTPStatus.OK.value: {
@@ -52,6 +54,7 @@ def user_put(id):
     return res
 
 @user_api.route('/users/<string:id>', methods=['DELETE'])
+@jwt_required()
 @swag_from({
     'responses': {
         HTTPStatus.OK.value: {

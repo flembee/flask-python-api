@@ -12,6 +12,7 @@ python-dotenv = "*"
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+flask_jwt_extended = "*"
 pymysql = "*"
 bcrypt = "*"
 
